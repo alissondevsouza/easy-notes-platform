@@ -5,7 +5,7 @@ import Logo from "@/assets/logo.svg"
 import Principal from "@/assets/principal.jpg"
 import { GoArrowRight } from "react-icons/go";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main className="flex flex-col min-h-[100dvh]">
       <header className="px-4 lg:px-8 h-16 flex items-center mx-10 mt-2 mb-1 p-9">
@@ -21,7 +21,7 @@ export default function Home() {
             <Link className="text-sm font-medium hover:underline underline-offset-4" href="/login">
               Entrar
             </Link>
-            <Link className="text-sm font-medium hover:underline underline-offset-4" href="/cadastro">
+            <Link className="text-sm font-medium hover:underline underline-offset-4" href="/sign-up">
               Cadastrar
             </Link>
             <ModeToggle />
@@ -86,7 +86,7 @@ export default function Home() {
             <div className="flex justify-center items-center">
               <Link
                 className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                href="/portal"
+                href="/dashboard"
               >
                 Escreva Suas Notas Agora <GoArrowRight className="ml-2" />
               </Link>
@@ -97,10 +97,10 @@ export default function Home() {
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-gray-500 dark:text-gray-400 px-14">© 2024 - easynotesplatform.com.br | Todos Direitos Reservados.</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6 px-14">
-          <Link className="text-xs hover:underline underline-offset-4" href="/terms">
+          <Link className="text-xs hover:underline underline-offset-4" href="/terms" target="_blank">
             Termos de Uso
           </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="/privacy">
+          <Link className="text-xs hover:underline underline-offset-4" href="/privacy" target="_blank">
             Privacidade
           </Link>
         </nav>
