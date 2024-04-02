@@ -2,7 +2,7 @@ import { ModeToggle } from "./_components/mode-toggle"
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/assets/logo.svg"
-import Principal from "@/assets/principal.jpg"
+import Home from "@/assets/Home.jpg"
 import { GoArrowRight } from "react-icons/go";
 
 export default function HomePage() {
@@ -47,7 +47,7 @@ export default function HomePage() {
               <div className="mx-auto flex w-full items-center justify-center p-4 sm:p-8">
                 <Image
                   className="rounded-lg shadow-lg"
-                  src={Principal}
+                  src={Home}
                   width={500}
                   height={500}
                   alt="Placeholder"

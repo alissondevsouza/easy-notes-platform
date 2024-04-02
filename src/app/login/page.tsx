@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import Logo from "@/assets/logo.svg"
-import Principal from "@/assets/principal.jpg"
+import Login from "@/assets/Login.jpg"
 import { GoArrowLeft } from "react-icons/go";
 
 export default function LoginPage() {
@@ -16,7 +16,7 @@ export default function LoginPage() {
                 <div className="absolute -z-10 w-full h-full flex justify-center items-center blur-sm">
                     <Image
                         className="rounded-l-xl h-[37.5rem] w-[98.5%] object-cover"
-                        src={Principal}
+                        src={Login}
                         alt="background image"
                         height={500}
                         width={500}
@@ -90,7 +90,7 @@ export default function LoginPage() {
                                 Novo na Easy Notes Platform?
                             </p>
 
-                            <Link href={'/cadastro'}>
+                            <Link href={'/sign-up'}>
                                 <Button className="w-full mt-2"> Crie sua Conta Grátis</Button>
                             </Link>
                         </div>
