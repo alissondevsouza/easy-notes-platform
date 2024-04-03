@@ -1,21 +1,20 @@
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import Logo from "@/assets/logo.svg"
 import Login from "@/assets/Login.jpg"
 import { GoArrowLeft } from "react-icons/go";
+import LoginForm from "@/app/login/_components/login-form";
 
 export default function LoginPage() {
 
     return (
         <main className="flex min-h-screen flex-row items-center justify-center">
-            <div className="w-full relative h-[38rem] max-w-md backdrop-blur-sm bg-white/10 rounded-l-xl border text-card-foreground shadow flex flex-col justify-center items-center p-6">
+            <div className="w-full relative h-[42rem] max-w-md backdrop-blur-sm bg-white/10 rounded-l-xl border text-card-foreground shadow flex flex-col justify-center items-center p-6">
                 <div className="absolute -z-10 w-full h-full flex justify-center items-center blur-sm">
                     <Image
-                        className="rounded-l-xl h-[37.5rem] w-[98.5%] object-cover"
+                        className="rounded-l-xl h-[41.5rem] w-[98.5%] object-cover"
                         src={Login}
                         alt="background image"
                         height={500}
@@ -46,7 +45,7 @@ export default function LoginPage() {
 
             </div>
 
-            <Card className="flex justify-center items-center flex-col w-full h-[38rem] max-w-md backdrop-blur-sm bg-white/5">
+            <Card className="flex justify-center items-center flex-col w-full h-[42rem] max-w-md backdrop-blur-sm bg-white/5">
                 <CardHeader className="flex justify-center items-center space-y-2">
                     <h2 className="text-2xl font-bold">
                         Entrar
@@ -57,17 +56,7 @@ export default function LoginPage() {
                 </CardHeader>
                 
                 <CardContent>
-                    <form className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input name="email" required type="email" />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="password">Senha</Label>
-                            <Input name="password" required type="password" />
-                        </div>
-                        <Button type="submit" className="w-full">Entrar</Button>
-                    </form>
+                    <LoginForm />
 
                     <div className="space-y-4 mt-4">
                         <div className="w-full flex justify-center items-center">
