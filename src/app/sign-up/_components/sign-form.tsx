@@ -3,27 +3,58 @@
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { FieldValues, useForm } from "react-hook-form"
+import { useToast } from "@/components/ui/use-toast"
 import { TSignUpSchema, signUpSchema } from "@/lib/type"
+import { NotificationInfo } from "@/lib/type"
+import signUpService from "../service/sign-up-service"
+import { FieldValues, useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from "next/navigation"
 
 export default function SignUpForm() {
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting },
-        reset
-    } = useForm<TSignUpSchema>({
+    const { toast } = useToast()  
+    
+    const router = useRouter()
+
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<TSignUpSchema>({
         mode: 'all',
         resolver: zodResolver(signUpSchema)
     })
 
-    const onSubmit = async (data: FieldValues) => {
+    const NOTIFICATION_MESSAGES = {
+        ERROR: {
+            title: 'Erro ao criar a conta!',
+            description: 'Tente novamente ou contate o administrador da plataforma',
+            variant: 'destructive'
+        },
+        SUCCESS: {
+            title: 'Bem vindo!',
+            description: 'Conta criada com sucesso! Faça login para acessar a plataforma',
+            variant: 'default'
+        }
+    };
 
-        await new Promise((resolver) => setTimeout(resolver, 2000));
-        console.log(data)
-        reset()
+    const errorMessage: NotificationInfo = NOTIFICATION_MESSAGES.ERROR;
+    const successMessage: NotificationInfo = NOTIFICATION_MESSAGES.SUCCESS;
+
+    const showNotification = (notificationInfo:NotificationInfo) => {
+        toast(notificationInfo);
+    };
+
+    const onSubmit = async (dataForm: FieldValues) => {
+
+        const createAccountResult = await signUpService.createAccount(dataForm)
+
+        if (!createAccountResult) {
+            showNotification(errorMessage)
+            reset()
+            return
+        }
+
+        showNotification(successMessage)
+
+        router.push('/login')
     }
 
     return (

@@ -23,3 +23,8 @@ export const loginSchema = z.object({
 })
 
 export type TLoginSchema = z.infer<typeof loginSchema>
+
+export interface NotificationInfo {
+    title: string;
+    description: string
+}
