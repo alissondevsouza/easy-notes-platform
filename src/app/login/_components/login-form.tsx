@@ -1,5 +1,6 @@
 'use client';
 
+import { login } from '@/actions/login-actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -19,9 +20,7 @@ export default function LoginForm() {
     });
 
     const onSubmit = async (data: FieldValues) => {
-        await new Promise(resolver => setTimeout(resolver, 2000));
-        console.log(data);
-        reset();
+        login(data);
     };
 
     return (
