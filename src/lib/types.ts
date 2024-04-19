@@ -29,6 +29,30 @@ export const loginSchema = z.object({
 
 export type TLoginSchema = z.infer<typeof loginSchema>;
 
+export const changePasswordSchema = z
+    .object({
+        password: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
+        confirmPassword: z
+            .string()
+            .min(6, 'A senha deve ter no mínimo 6 caracteres'),
+    })
+    .refine(fields => fields.password === fields.confirmPassword, {
+        message: 'As senhas devem ser iguais',
+        path: ['confirmPassword'],
+    })
+    .transform(fields => ({
+        password: fields.password,
+        confirmPassword: fields.confirmPassword,
+    }));
+
+export type TChangePasswordSchema = z.infer<typeof changePasswordSchema>;
+
+export const resetPasswordSchema = z.object({
+    email: z.string().email('Email inválido'),
+});
+
+export type TResetPasswordSchema = z.infer<typeof resetPasswordSchema>;
+
 export interface NotificationInfo {
     title: string;
     description: string;
