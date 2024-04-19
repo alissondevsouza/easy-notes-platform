@@ -1,10 +1,6 @@
 'use client';
 
-import {
-    createUser,
-    getUserByEmail,
-    getUserByName,
-} from '@/actions/user-actions';
+import { createUser, getUserByEmail } from '@/actions/user-actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -12,7 +8,6 @@ import { useToast } from '@/components/ui/use-toast';
 import {
     errorMessageDefault,
     errorMessageUserEmail,
-    errorMessageUserName,
     successMessage,
 } from '@/lib/errors';
 import { NotificationInfo, TSignUpSchema, signUpSchema } from '@/lib/types';
@@ -40,19 +35,17 @@ export default function SignUpForm() {
     };
 
     const onSubmit = async (dataForm: FieldValues) => {
-        const { name, email } = dataForm;
-
-        const userNameExists = await getUserByName(name);
-
-        if (userNameExists) {
-            showNotification(errorMessageUserName);
-            return;
-        }
+        const { email } = dataForm;
 
         const userEmailExists = await getUserByEmail(email);
 
         if (userEmailExists) {
             showNotification(errorMessageUserEmail);
+            dataForm.name = '';
+            dataForm.email = '';
+            dataForm.password = '';
+            dataForm.confirmPassword = '';
+            reset(dataForm);
             return;
         }
 
@@ -60,6 +53,11 @@ export default function SignUpForm() {
 
         if (!response) {
             showNotification(errorMessageDefault);
+            dataForm.name = '';
+            dataForm.email = '';
+            dataForm.password = '';
+            dataForm.confirmPassword = '';
+            reset(dataForm);
             return;
         }
 

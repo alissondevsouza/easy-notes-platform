@@ -1,10 +1,16 @@
 'use client';
 
-import { login } from '@/actions/login-actions';
+import { loginCredentials } from '@/actions/login-actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { TLoginSchema, loginSchema } from '@/lib/types';
+import { useToast } from '@/components/ui/use-toast';
+import {
+    errorMessageCredentials,
+    errorMessageDefaultLogin,
+    successMessageLogin,
+} from '@/lib/errors';
+import { NotificationInfo, TLoginSchema, loginSchema } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, useForm } from 'react-hook-form';
 
@@ -19,8 +25,28 @@ export default function LoginForm() {
         resolver: zodResolver(loginSchema),
     });
 
-    const onSubmit = async (data: FieldValues) => {
-        login(data);
+    const { toast } = useToast();
+
+    const showNotification = (notificationInfo: NotificationInfo) => {
+        toast(notificationInfo);
+    };
+
+    const onSubmit = async (Formdata: FieldValues) => {
+        const result = await loginCredentials(Formdata);
+
+        if (result?.error) {
+            if (result.error === 'CredentialsSignin') {
+                showNotification(errorMessageCredentials);
+            } else {
+                showNotification(errorMessageDefaultLogin);
+            }
+            Formdata.email = '';
+            Formdata.password = '';
+            reset(Formdata);
+            return;
+        }
+
+        showNotification(successMessageLogin);
     };
 
     return (
